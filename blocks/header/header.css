@@ -1,4 +1,22 @@
 .header{
   min-height: 56px;
   min-width: 320px;
+  border-bottom: 1px solid #545454;
+  padding-top: 28px;
+  margin-left: 27px;
+}
+
+@media (min-width: 768px){
+  .header{
+    max-width: 880px;
+    height: 74px;
+    padding-top: 45px;
+  }
+}
+
+@media (min-width: 934px){
+  .header{
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
