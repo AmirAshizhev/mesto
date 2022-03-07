@@ -10,5 +10,6 @@
   .profile__avatar{
     justify-self: start;
     align-self: start;
+    margin-bottom: 0;
   }
 }
