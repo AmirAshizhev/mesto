@@ -11,6 +11,13 @@
 
 }
 
+@media (min-width: 450px){
+  .profile__edit-button{
+    right: 65px;
+    top: 8px;
+
+  }
+}
 
 
 @media (min-width: 768px){
