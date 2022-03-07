@@ -1,6 +1,30 @@
 .profile{
   margin-top: 42px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  max-width: 880px;
+
+}
+
+@media (min-width: 450px){
+  .profile{
+    margin-top: 44px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, max-content);
+  }
+}
+
+@media (min-width: 768px){
+  .profile{
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: max-content;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 940px){
+  .profile{
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

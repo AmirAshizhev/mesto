@@ -8,3 +8,17 @@
   margin-top: 0;
   margin-bottom: 7px; /*14 px*/
 }
+
+@media (min-width: 450px){
+  .profile__title{
+    text-align: start;
+  }
+}
+
+@media (min-width: 768px){
+  .profile__title{
+    font-size: 42px;
+    line-height: 48px;
+    margin-bottom: 8px;
+  }
+}

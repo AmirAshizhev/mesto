@@ -1,6 +1,16 @@
 .profile__info{
   color: white;
   position: relative;
-  min-width: 282px;
+  width: 282px;
   margin-bottom: 33px; /*36px*/
+  justify-self: center;
+}
+
+
+@media (min-width: 768px){
+  .profile__info{
+    justify-self: start;
+    min-width: 336px;
+    align-self: center;
+  }
 }

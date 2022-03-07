@@ -1,7 +1,7 @@
 .header{
   min-height: 56px;
   min-width: 293px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding-top: 28px;
   padding-left: 27px;
 }

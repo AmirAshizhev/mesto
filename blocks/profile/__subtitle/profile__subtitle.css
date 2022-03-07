@@ -7,3 +7,15 @@
   font-size: 14px;
   line-height: 17px;
 }
+
+@media (min-width: 450px){
+  .profile__subtitle{
+    text-align: start;
+  }
+}
+@media (min-width: 768px){
+  .profile__subtitle{
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
