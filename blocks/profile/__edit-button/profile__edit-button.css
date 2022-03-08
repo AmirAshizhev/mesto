@@ -29,3 +29,9 @@
     background-image: url(../../../images/edit-button2.svg);
   }
 }
+
+.profile__edit-button:hover{
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+  cursor: pointer;
+}
