@@ -6,6 +6,8 @@
   position: absolute;
   top: -38px;
   right: 0px;
+  border: none;
+  background-color: transparent;
 }
 
 .popup__exit-button:hover{
