@@ -7,11 +7,19 @@
   text-align: center;
   margin-top: 0;
   margin-bottom: 7px; /*14 px*/
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 190px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 450px){
   .profile__title{
     text-align: start;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -20,5 +28,7 @@
     font-size: 42px;
     line-height: 48px;
     margin-bottom: 8px;
+    max-width: 300px;
+
   }
 }

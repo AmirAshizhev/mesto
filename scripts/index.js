@@ -1,43 +1,37 @@
 const popup = document.querySelector('.popup');
 const openPopup = document.querySelector('.profile__edit-button');
 const closePopup = popup.querySelector('.popup__exit-button');
-const savePopup = popup.querySelector('.popup__save-button');
 
-function togglePopup () {
-  popup.classList.toggle('popup_opened');
+let profileTitle = document.querySelector('.profile__title');
+let profileSubtitle = document.querySelector('.profile__subtitle');
+let formElement = document.querySelector('#popup__form');
+let nameInput = popup__form.querySelector('#popup__name');
+let jobInput = popup__form.querySelector('#popup__description');
+
+//popup.addEventListener('click', function(event) {
+//  if (event.target === event.currentTarget){
+//    togglePopup();
+//  }
+//});
+
+function savePopup (){
+  popup.classList.remove('popup_opened');
 }
-
-popup.addEventListener('click', function(event) {
-  if (event.target === event.currentTarget){
-    togglePopup();
-  }
-});
-
-openPopup.addEventListener('click', togglePopup);
-closePopup.addEventListener('click', togglePopup);
-
-
-
-let formElement = document.querySelector('.popup');
-
-let nameInput = popup.querySelector('.popup__name');
-let jobInput = popup.querySelector('.popup__description');
-
-
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  let nameInputValue = nameInput.value;
-  let jobInputValue = jobInput.value;
-
-  let profileTitle = document.querySelector('.profile__title');
-  let profileSubtitle = document.querySelector('.profile__subtitle');
-
-  profileTitle.textContent = nameInputValue;
-  profileSubtitle.textContent = jobInputValue;
-  togglePopup();
+  profileTitle.textContent = nameInput.value;
+  profileSubtitle.textContent = jobInput.value;
+  savePopup();
 }
 
+openPopup.addEventListener('click', function(){
+  popup.classList.add('popup_opened');
+});
 
-popup.addEventListener('submit', formSubmitHandler);
+closePopup.addEventListener('click', function(){
+  popup.classList.remove('popup_opened');
+});
+
+popup__form.addEventListener('submit', formSubmitHandler);

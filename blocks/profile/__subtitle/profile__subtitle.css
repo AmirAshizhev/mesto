@@ -6,16 +6,22 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 282px;
 }
 
 @media (min-width: 450px){
   .profile__subtitle{
     text-align: start;
+    max-width: 200px;
   }
 }
 @media (min-width: 768px){
   .profile__subtitle{
     font-size: 18px;
     line-height: 22px;
+    max-width: 300px;
   }
 }
