@@ -13,8 +13,13 @@ let jobInput = popup__form.querySelector('#popup__description');
 //    togglePopup();
 //  }
 //});
+function openingPopup(){
+  popup.classList.add('popup_opened');
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileSubtitle.textContent;
+}
 
-function savePopup (){
+function closingPopup (){
   popup.classList.remove('popup_opened');
 }
 
@@ -23,15 +28,11 @@ function formSubmitHandler (evt) {
 
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-  savePopup();
+  closingPopup();
 }
 
-openPopup.addEventListener('click', function(){
-  popup.classList.add('popup_opened');
-});
+openPopup.addEventListener('click', openingPopup);
 
-closePopup.addEventListener('click', function(){
-  popup.classList.remove('popup_opened');
-});
+closePopup.addEventListener('click', closingPopup);
 
-popup__form.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);
