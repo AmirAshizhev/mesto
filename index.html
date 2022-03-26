@@ -65,7 +65,7 @@
       <p class="footer__copyright">&#169;  2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_edit-button">
       <div class="popup__container">
         <button class="popup__exit-button" type="button" aria-label="Закрыть форму"></button>
         <form name="popup__form" id="popup__form">
@@ -75,6 +75,20 @@
             <input type="text"  name="description" placeholder="Введите род деятельности" id="popup__description" class="popup__item">
           </fieldset>
           <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_add-button">
+      <div class="popup__container">
+        <button class="popup__exit-button" type="button" aria-label="Закрыть форму"></button>
+        <form name="popup__form" id="popup__form">
+          <h2 class="popup__title">Новое место</h2>
+          <fieldset class="popup__fieldset">
+            <input type="text"  name="name" placeholder="Название" id="popup__name" class="popup__item">
+            <input type="text"  name="description" placeholder="Ссылка на картинку" id="popup__description" class="popup__item">
+          </fieldset>
+          <button class="popup__save-button" type="submit" aria-label="Создать">Создать</button>
         </form>
       </div>
     </div>
