@@ -9,9 +9,12 @@ const closePopupAdd = popupAdd.querySelector('.popup__exit-button');
 
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-let formElement = document.querySelector('#popup__form');
+let formEditElement = document.querySelector('#popup__form_edit');
+let formAddElement = document.querySelector('#popup__form_add');
 let nameInput = popupEdit.querySelector('#popup__name');
 let jobInput = popupEdit.querySelector('#popup__description');
+let namePlaceInput = popupAdd.querySelector('#popup__name');
+let linkPlaceInput = popupAdd.querySelector('#popup__description');
 
 //popup.addEventListener('click', function(event) {
 //  if (event.target === event.currentTarget){
@@ -32,8 +35,7 @@ function closingPopup (popup){
   popup.classList.remove('popup_opened');
 }
 
-
-function formSubmitHandler (evt) {
+function formEditSubmitHandler (evt) {
   evt.preventDefault();
 
   profileTitle.textContent = nameInput.value;
@@ -41,19 +43,26 @@ function formSubmitHandler (evt) {
   closingPopup(popupEdit);
 }
 
+function formAddSubmitHandler (evt){
+  evt.preventDefault();
+
+  renderCard(linkPlaceInput.value, namePlaceInput.value);
+  linkPlaceInput.value = '';
+  namePlaceInput.value= '';
+  closingPopup(popupAdd);
+}
+
 openPopupEdit.addEventListener('click', openingPopupEdit);
-
 openPopupAdd.addEventListener('click', openingPopupAdd);
-
 closePopupEdit.addEventListener('click', function() {
   closingPopup(popupEdit);
 });
-
 closePopupAdd.addEventListener('click', function() {
   closingPopup(popupAdd);
 });
 
-formElement.addEventListener('submit', formSubmitHandler);
+formEditElement.addEventListener('submit', formEditSubmitHandler);
+formAddElement.addEventListener('submit', formAddSubmitHandler);
 
 
 const initialCards = [
@@ -85,12 +94,43 @@ const initialCards = [
 
 const cardsList = document.querySelector('.cards');
 
-function renderCards(initialCards) {
-  return `<li class="cards__item">
-            <img src="${initialCards.link}" alt="руины церкви" class="cards__image">
-            <h2 class="cards__title">${initialCards.name}</h2>
-            <button type="button" class="cards__like"></button>
-          </li>`;
-};
+function renderCard(link, place) {
+  const cardTemplate = document.querySelector('#cards__template').content;
+  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
-cardsList.innerHTML += initialCards.map(renderCards).join('');
+  cardElement.querySelector('.cards__image').src = link;
+  cardElement.querySelector('.cards__title').textContent = place;
+  cardsList.prepend(cardElement);
+}
+
+initialCards.forEach(cardElement => renderCard(cardElement.link, cardElement.name));
+
+
+//console.log(initialCards);
+//
+
+//function renderCards(initialCards) {
+  //return `<li class="cards__item">
+    //        <img src="${initialCards.link}" alt="руины церкви" class="cards__image">
+    //        <h2 class="cards__title">${initialCards.name}</h2>
+    //        <button type="button" class="cards__like"></button>
+    //      </li>`;
+//};
+
+//cardsList.innerHTML += initialCards.map(renderCard).join('');
+
+//функция создания карточки
+//const createCard = (namePlaceInput, linkPlaceInput) => {
+  // Клонируем шаблон, наполняем его информацией из объекта data, навешиваем всякие обработчики событий, о которых будет инфа ниже
+ // const userTemplate = document.querySelector('#cards__template').content;
+// клонируем содержимое тега template
+  //const userElement = userTemplate.querySelector('.cards__item').cloneNode(true);
+
+// наполняем содержимым
+ // userElement.querySelector('.cards__image').src = linkPlaceInput.value;
+ // userElement.querySelector('.cards__title').textContent = namePlaceInput.value;
+
+// отображаем на странице
+ // cardsList.append(userElement);
+  // Возвращаем получившуюся карточку
+//};
