@@ -102,13 +102,22 @@ function renderCard(link, place) {
   cardElement.querySelector('.cards__title').textContent = place;
   cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('cards__like_active');
-  });
+  })
+  deletingCard(cardElement);
   cardsList.prepend(cardElement);
 }
 
 initialCards.forEach(cardElement => renderCard(cardElement.link, cardElement.name));
 
+function deleteCard(event){
+  const delcard = event.currentTarget.closest('.cards__item');
+  console.log(delcard)
+  delcard.remove();
+}
 
+function deletingCard(cardElement){
+  cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
+}
 
 //console.log(initialCards);
 //
