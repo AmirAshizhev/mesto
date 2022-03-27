@@ -8,6 +8,7 @@
   background-color: white;
   border-radius: 10px;
   margin-bottom: 20px;
+  position: relative;
 }
 
 @media (min-width: 581px){

@@ -100,10 +100,14 @@ function renderCard(link, place) {
 
   cardElement.querySelector('.cards__image').src = link;
   cardElement.querySelector('.cards__title').textContent = place;
+  cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('cards__like_active');
+  });
   cardsList.prepend(cardElement);
 }
 
 initialCards.forEach(cardElement => renderCard(cardElement.link, cardElement.name));
+
 
 
 //console.log(initialCards);
