@@ -1,11 +1,13 @@
-//const popup = document.querySelector('.popup');
 const openPopupEdit = document.querySelector('.profile__edit-button');
 const openPopupAdd = document.querySelector('.profile__add-button');
 
 const popupEdit = document.querySelector('.popup_edit-button');
 const popupAdd = document.querySelector('.popup_add-button');
+const popupPic = document.querySelector('.popop_big-pic');
+
 const closePopupEdit = popupEdit.querySelector('.popup__exit-button');
 const closePopupAdd = popupAdd.querySelector('.popup__exit-button');
+const closePopupPic = popupPic.querySelector('.popup__exit-button');
 
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
@@ -15,12 +17,10 @@ let nameInput = popupEdit.querySelector('#popup__name');
 let jobInput = popupEdit.querySelector('#popup__description');
 let namePlaceInput = popupAdd.querySelector('#popup__name');
 let linkPlaceInput = popupAdd.querySelector('#popup__description');
+let imgPopupPic = popupPic.querySelector('.popup__img');
+let namePopupPic = popupPic.querySelector('.popup__text');
 
-//popup.addEventListener('click', function(event) {
-//  if (event.target === event.currentTarget){
-//    togglePopup();
-//  }
-//});
+
 function openingPopupEdit(){
   popupEdit.classList.add('popup_opened');
   nameInput.value = profileTitle.textContent;
@@ -30,6 +30,8 @@ function openingPopupEdit(){
 function openingPopupAdd(){
   popupAdd.classList.add('popup_opened');
 }
+
+
 
 function closingPopup (popup){
   popup.classList.remove('popup_opened');
@@ -54,11 +56,18 @@ function formAddSubmitHandler (evt){
 
 openPopupEdit.addEventListener('click', openingPopupEdit);
 openPopupAdd.addEventListener('click', openingPopupAdd);
+
+
 closePopupEdit.addEventListener('click', function() {
   closingPopup(popupEdit);
 });
+
 closePopupAdd.addEventListener('click', function() {
   closingPopup(popupAdd);
+});
+
+closePopupPic.addEventListener('click', function() {
+  closingPopup(popupPic);
 });
 
 formEditElement.addEventListener('submit', formEditSubmitHandler);
@@ -100,18 +109,19 @@ function renderCard(link, place) {
 
   cardElement.querySelector('.cards__image').src = link;
   cardElement.querySelector('.cards__title').textContent = place;
+  cardElement.querySelector('.cards__image').alt = place;
   cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('cards__like_active');
   })
+  picPopup(cardElement);
   deletingCard(cardElement);
   cardsList.prepend(cardElement);
 }
 
 initialCards.forEach(cardElement => renderCard(cardElement.link, cardElement.name));
 
-function deleteCard(event){
-  const delcard = event.currentTarget.closest('.cards__item');
-  console.log(delcard)
+function deleteCard(evt){
+  const delcard = evt.currentTarget.closest('.cards__item');
   delcard.remove();
 }
 
@@ -119,31 +129,12 @@ function deletingCard(cardElement){
   cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
 }
 
-//console.log(initialCards);
-//
+function openingPopupPic(){
+  popupPic.classList.add('popup_opened');
+  console.log(namePopupPic)
+  console.log(imgPopupPic)
+}
 
-//function renderCards(initialCards) {
-  //return `<li class="cards__item">
-    //        <img src="${initialCards.link}" alt="руины церкви" class="cards__image">
-    //        <h2 class="cards__title">${initialCards.name}</h2>
-    //        <button type="button" class="cards__like"></button>
-    //      </li>`;
-//};
-
-//cardsList.innerHTML += initialCards.map(renderCard).join('');
-
-//функция создания карточки
-//const createCard = (namePlaceInput, linkPlaceInput) => {
-  // Клонируем шаблон, наполняем его информацией из объекта data, навешиваем всякие обработчики событий, о которых будет инфа ниже
- // const userTemplate = document.querySelector('#cards__template').content;
-// клонируем содержимое тега template
-  //const userElement = userTemplate.querySelector('.cards__item').cloneNode(true);
-
-// наполняем содержимым
- // userElement.querySelector('.cards__image').src = linkPlaceInput.value;
- // userElement.querySelector('.cards__title').textContent = namePlaceInput.value;
-
-// отображаем на странице
- // cardsList.append(userElement);
-  // Возвращаем получившуюся карточку
-//};
+function picPopup(cardElement){
+  cardElement.querySelector('.cards__image').addEventListener('click', openingPopupPic)
+}
