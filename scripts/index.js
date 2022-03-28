@@ -131,10 +131,7 @@ function deletingCard(cardElement){
 
 function openingPopupPic(cardElement){
   popupPic.classList.add('popup_opened');
-  console.log(namePopupPic)
-  console.log(imgPopupPic)
-  console.log(cardElement.querySelector('.cards__title'))
-  console.log(cardElement.querySelector('.cards__image'))
+
   namePopupPic.textContent = cardElement.querySelector('.cards__title').textContent;
   imgPopupPic.src = cardElement.querySelector('.cards__image').src;
 }
