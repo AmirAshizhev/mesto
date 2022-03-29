@@ -23,8 +23,10 @@
 @import url(../blocks/cards/__trash/cards__trash.css);
 
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_big-pic/popup_big-pic.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_big-pic/popup__countainer_big-pic.css);
 @import url(../blocks/popup/__fieldset/popup__fieldset.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__item/popup__item.css);
