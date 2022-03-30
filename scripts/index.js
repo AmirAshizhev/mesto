@@ -3,7 +3,7 @@ const openPopupAdd = document.querySelector('.profile__add-button');
 
 const popupEdit = document.querySelector('.popup_edit-button');
 const popupAdd = document.querySelector('.popup_add-button');
-const popupPic = document.querySelector('.popop_picture');
+const popupPic = document.querySelector('.popup_picture');
 
 const closePopupEdit = popupEdit.querySelector('.popup__exit-button');
 const closePopupAdd = popupAdd.querySelector('.popup__exit-button');
