@@ -13,10 +13,10 @@ let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let formEditElement = document.querySelector('#popup__form_edit');
 let formAddElement = document.querySelector('#popup__form_add');
-let nameInput = popupEdit.querySelector('#popup__name');
-let jobInput = popupEdit.querySelector('#popup__description');
-let namePlaceInput = popupAdd.querySelector('#popup__name');
-let linkPlaceInput = popupAdd.querySelector('#popup__description');
+let nameInput = popupEdit.querySelector('.popup__item_name');
+let jobInput = popupEdit.querySelector('.popup__item_description');
+let namePlaceInput = popupAdd.querySelector('.popup__item_name');
+let linkPlaceInput = popupAdd.querySelector('.popup__item_description');
 let imgPopupPic = popupPic.querySelector('.popup__img');
 let namePopupPic = popupPic.querySelector('.popup__text');
 
