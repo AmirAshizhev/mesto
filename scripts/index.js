@@ -61,6 +61,15 @@ openPopupAdd.addEventListener('click', function() {
 });
 
 
+function openPicPopup(cardElement){
+  cardElement.querySelector('.cards__image').addEventListener('click', function(){
+    openingPopup(popupPic);
+    namePopupPic.textContent = cardElement.querySelector('.cards__title').textContent;
+    imgPopupPic.src = cardElement.querySelector('.cards__image').src;
+    imgPopupPic.alt = cardElement.querySelector('.cards__image').alt;
+  })
+}
+
 closePopupEdit.addEventListener('click', function() {
   closingPopup(popupEdit);
 });
@@ -119,7 +128,7 @@ const renderCard = (cardElement, cardsList) => {
   card.querySelector('.cards__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('cards__like_active');
   })
-  picPopup(card);
+  openPicPopup(card);
   deletingCard(card);
   cardsList.prepend(card);
 }
@@ -136,16 +145,4 @@ function deletingCard(cardElement){
   cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
 }
 
-function openingPopupPic(cardElement){
-  popupPic.classList.add('popup_opened');
 
-  namePopupPic.textContent = cardElement.querySelector('.cards__title').textContent;
-  imgPopupPic.src = cardElement.querySelector('.cards__image').src;
-  imgPopupPic.alt = cardElement.querySelector('.cards__image').alt;
-}
-
-function picPopup(cardElement){
-  cardElement.querySelector('.cards__image').addEventListener('click', function(){
-    openingPopupPic(cardElement);
-  })
-}
