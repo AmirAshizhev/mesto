@@ -46,7 +46,7 @@ function handleCardFormSubmit (evt){
   const data = {name: namePlaceInput.value, link: linkPlaceInput.value}
   renderCard(data, cardsList);
   linkPlaceInput.value = '';
-  namePlaceInput.value= '';
+  namePlaceInput.value = '';
   closingPopup(popupAdd);
 }
 
