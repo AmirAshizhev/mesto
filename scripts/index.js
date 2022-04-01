@@ -120,16 +120,17 @@ function createCard(link, name) {
   cardElement.querySelector('.cards__image').src = link;
   cardElement.querySelector('.cards__title').textContent = name;
   cardElement.querySelector('.cards__image').alt = name;
+  cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('cards__like_active');
+  })
+  openPicPopup(cardElement);
+  deletingCard(cardElement);
   return cardElement
 }
 
 const renderCard = (cardElement, cardsList) => {
   const card = createCard(cardElement.link, cardElement.name);
-  card.querySelector('.cards__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('cards__like_active');
-  })
-  openPicPopup(card);
-  deletingCard(card);
+
   cardsList.prepend(card);
 }
 
