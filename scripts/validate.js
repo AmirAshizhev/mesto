@@ -1,39 +1,40 @@
-function enableValidation() {
-  const form = document.querySelector('#popup__form_add');
+function enableValidation(config) {
+  const form = document.querySelector(config.form);
   console.log(form);
-  form.addEventListener('submit', handleFormSubmit);
+  //form.addEventListener('submit', handleFormSubmit);
   form.addEventListener('input', handleFormInput);
 }
 
-function handleFormSubmit(evt) {
-  evt.preventDefault();
+// function handleFormSubmit(evt) {
+//   evt.preventDefault();
 
-  const form = evt.currentTarget;
-  const isValid = form.checkValidity();
-  console.log(isValid);
-  if (isValid) {
-    alert('isValid');
-  }
-  else {
-    alert('notisValid')
-  }
+//   const form = evt.currentTarget;
+//   const isValid = form.ValidityState();
+//   console.log(isValid);
+//   if (isValid) {
+//     alert('isValid');
+//   }
+//   else {
+//     alert('notisValid')
+//   }
 
-}
+// }
 
 function handleFormInput(evt) {
   const form = evt.currentTarget;
   const input = evt.target;
 
-  setError(input);
+  input.setCustomValidity('')
+  // setError(input);
   setFieldError(input);
   setSubmitButtonState(form);
 }
 
 
 
-function setError(input) {
-  const validity = input.validity;
-  input.setCustomValidity('')
+// function setError(input) {
+//   const validity = input.validity;
+//   input.setCustomValidity('')
 
   // if (validity.tooShort || input.tooLong){
   //   const currentLenght = input.value.lenght;
@@ -47,7 +48,7 @@ function setError(input) {
   // if (input.typeMismatch){
   //   input.setCustomValidity('Это не ссылка')
   // }
-}
+// }
 
 function setFieldError(input){
   const span = document.querySelector(`#${input.id}-error`);
@@ -69,5 +70,11 @@ function setSubmitButtonState(form) {
   }
 };
 
-enableValidation();
+enableValidation({
+  form: '#popup__form_add'
+});
+
+enableValidation({
+  form: '#popup__form_edit'
+});
 
