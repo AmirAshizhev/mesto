@@ -1,16 +1,16 @@
 function enableValidation() {
-  const form = document.querySelector('#popup__form_add[name="popup__form"]');
-
-  form.addEventListener('submit', handleFormSubmit);//сабмиты есть и вдругом js файле
-  //form.addEventListener('input', handleFormInput);
+  const form = document.querySelector('#popup__form_add');
+  console.log(form);
+  form.addEventListener('submit', handleFormSubmit);
+  form.addEventListener('input', handleFormInput);
 }
 
-function handleFormSubmit (evt) {
-  evt.preventDefault()
+function handleFormSubmit(evt) {
+  evt.preventDefault();
 
   const form = evt.currentTarget;
   const isValid = form.checkValidity();
-  console.log(isValid)
+  console.log(isValid);
   if (isValid) {
     alert('isValid');
   }
@@ -20,4 +20,54 @@ function handleFormSubmit (evt) {
 
 }
 
+function handleFormInput(evt) {
+  const form = evt.currentTarget;
+  const input = evt.target;
+
+  setError(input);
+  setFieldError(input);
+  setSubmitButtonState(form);
+}
+
+
+
+function setError(input) {
+  const validity = input.validity;
+  input.setCustomValidity('')
+
+  // if (validity.tooShort || input.tooLong){
+  //   const currentLenght = input.value.lenght;
+  //   const min = input.getAttribute("minlength");
+  //   const max = input.getAttribute("maxlength");
+  //   input.setCustomValidity(
+  //     `Строка имеет неверную длину. введено ${currentLenght} сималов. а должно быть от ${min} до  ${max}`
+  //   );
+  // }
+
+  // if (input.typeMismatch){
+  //   input.setCustomValidity('Это не ссылка')
+  // }
+}
+
+function setFieldError(input){
+  const span = document.querySelector(`#${input.id}-error`);
+  span.textContent = input.validationMessage;
+}
+
+
+function setSubmitButtonState(form) {
+  const button = form.querySelector('.popup__save-button');
+  const isValid = form.checkValidity();
+
+  if (!isValid){
+    button.classList.add('popup__save-button_invalid');
+    button.setAttribute('disabled', 'disabled');
+  }
+  else {
+    button.classList.remove('popup__save-button_invalid');
+    button.removeAttribute('disabled');
+  }
+};
+
 enableValidation();
+
