@@ -4,7 +4,7 @@
   background-color: white;
   border-radius: 10px;
   position: relative;
-
+  cursor: auto;
 }
 @media (min-width: 550px){
   .popup__container{
@@ -13,8 +13,6 @@
   }
 }
 
-.popup__container{
-  cursor: auto;
-}
+
 
 
