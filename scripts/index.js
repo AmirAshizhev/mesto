@@ -32,9 +32,9 @@ function closingPopup (popup){
 }
 
 function closingPopupOverlay (popup) {
-  popup.addEventListener('click', function(event) {
-    if (event.target === event.currentTarget){
-     closingPopup (popup);
+  popup.addEventListener('click', function(evt) {
+    if (evt.target === evt.currentTarget){
+      closingPopup (popup);
    }
   });
 }
@@ -45,6 +45,19 @@ closingPopupOverlay (popupEdit);
 
 closingPopupOverlay (popupPic);
 
+function escapePopup (popup) {
+  document.addEventListener('keydown', function(evt){
+    if(evt.code === 'Escape'){
+      closingPopup (popup);
+    }
+  })
+}
+
+escapePopup(popupAdd);
+
+escapePopup(popupEdit);
+
+escapePopup(popupPic);
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
