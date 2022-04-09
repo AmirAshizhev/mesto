@@ -1,6 +1,6 @@
 function enableValidation(config) {
   const form = document.querySelector(config.form);
-  console.log(form);
+
   //form.addEventListener('submit', handleFormSubmit);
   form.addEventListener('input', handleFormInput);
 }
