@@ -26,6 +26,19 @@ const namePopupPic = popupPic.querySelector('.popup__text');
 function openingPopup(popup){
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc)
+  const inputList = popup.querySelectorAll('.popup__item');
+  const errorElement = popup.querySelectorAll('.popup__item-error');
+  const buttonElement = popup.querySelector('.popup__save-button');
+
+  errorElement.forEach((error) => {
+    error.textContent = '';
+  })
+
+  inputList.forEach((error) => {
+    error.classList.remove('popup__item_type_error');
+  })
+
+  // toggleButtonState(inputList, buttonElement, {inactiveButtonClass: 'popup__save-button_invalid'});
 }
 
 function closingPopup (popup){
