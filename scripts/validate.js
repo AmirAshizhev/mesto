@@ -34,7 +34,16 @@ const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
+
 };
+
+
+const hiderError = (inputList, formElement, inputErrorClass, errorClass) =>{
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, {inputErrorClass, errorClass})
+  })
+}
+
 
 const checkInputValidity = (formElement, inputElement, rest) => {
     if (!inputElement.validity.valid) {
@@ -52,8 +61,7 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'disabled');
+    addButtonClassList(buttonElement, inactiveButtonClass);
   }
   else {
     buttonElement.classList.remove(inactiveButtonClass);
@@ -61,6 +69,10 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   }
 };
 
+const addButtonClassList = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'disabled');
+}
 
 // enableValidation();
 enableValidation({

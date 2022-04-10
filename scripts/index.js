@@ -26,19 +26,7 @@ const namePopupPic = popupPic.querySelector('.popup__text');
 function openingPopup(popup){
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc)
-  const inputList = popup.querySelectorAll('.popup__item');
-  const errorElement = popup.querySelectorAll('.popup__item-error');
-  const buttonElement = popup.querySelector('.popup__save-button');
 
-  errorElement.forEach((error) => {
-    error.textContent = '';
-  })
-
-  inputList.forEach((error) => {
-    error.classList.remove('popup__item_type_error');
-  })
-
-  // toggleButtonState(inputList, buttonElement, {inactiveButtonClass: 'popup__save-button_invalid'});
 }
 
 function closingPopup (popup){
@@ -85,16 +73,27 @@ function handleCardFormSubmit (evt){
   linkPlaceInput.value = '';
   namePlaceInput.value = '';
 
+  const buttonElement = popupAdd.querySelector('.popup__save-button')
+  addButtonClassList(buttonElement, 'popup__save-button_invalid');
 }
 
 btnOpenPopupEdit.addEventListener('click', function() {
   openingPopup(popupEdit);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+
+  const inputList = popupEdit.querySelectorAll('.popup__item');
+
+  hiderError(inputList, popupEdit, 'popup__item_type_error', 'popup__item-error_active');
 });
 
 btnOpenPopupAdd.addEventListener('click', function() {
   openingPopup(popupAdd);
+
+  const inputList = popupAdd.querySelectorAll('.popup__item');
+
+  hiderError(inputList, popupAdd, 'popup__item_type_error', 'popup__item-error_active');
+
 });
 
 
