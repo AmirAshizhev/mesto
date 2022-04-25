@@ -1,3 +1,4 @@
+import {Card} from './Card.js'
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -9,7 +10,7 @@ const btnClosePopupEdit = popupEdit.querySelector('.popup__exit-button');
 const btnClosePopupAdd = popupAdd.querySelector('.popup__exit-button');
 const btnClosePopupPic = popupPic.querySelector('.popup__exit-button');
 
-const cardTemplate = document.querySelector('#cards__template').content;
+// const cardTemplate = document.querySelector('#cards__template').content;
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -154,33 +155,37 @@ const initialCards = [
 
 const cardsList = document.querySelector('.cards');
 
-function createCard(link, name) {
-  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-  cardElement.querySelector('.cards__image').src = link;
-  cardElement.querySelector('.cards__title').textContent = name;
-  cardElement.querySelector('.cards__image').alt = name;
-  cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('cards__like_active');
-  })
-  openPicPopup(cardElement);
-  cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
-  return cardElement
-}
+// function createCard(link, name) {
+//   const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
+//   cardElement.querySelector('.cards__image').src = link;
+//   cardElement.querySelector('.cards__title').textContent = name;
+//   cardElement.querySelector('.cards__image').alt = name;
+//   cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
+//     evt.target.classList.toggle('cards__like_active');
+//   })
+//   openPicPopup(cardElement);
+//   cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
+//   return cardElement
+// }
 
-const renderCard = (cardElement, cardsList) => {
-  const card = createCard(cardElement.link, cardElement.name);
+// const renderCard = (cardElement, cardsList) => {
+//   const card = createCard(cardElement.link, cardElement.name);
 
-  cardsList.prepend(card);
-}
-
-
-initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
-
-function deleteCard(evt){
-  const delcard = evt.currentTarget.closest('.cards__item');
-  delcard.remove();
-}
+//   cardsList.prepend(card);
+// }
 
 
+initialCards.forEach((cardElement) => {
+  const card = new Card(cardElement.link, cardElement.name);
+  const cardItem = card.createCard();
+  cardsList.prepend(cardItem);
+});
+
+// function deleteCard(evt){
+//   const delcard = evt.currentTarget.closest('.cards__item');
+//   delcard.remove();
+// }
+
+//export {cardTemplate, namePopupPic, imgPopupPic, popupPic };
 
 
