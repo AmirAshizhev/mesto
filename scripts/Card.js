@@ -19,13 +19,25 @@ class Card {
     this._cardElement.querySelector('.cards__image').src = this._link;
     this._cardElement.querySelector('.cards__title').textContent = this._name;
     this._cardElement.querySelector('.cards__image').alt = this._name;
+
+    this._setEventListeners();
+    // this.deleteCard();
     return this._cardElement
   }
 
+
   _setEventListeners(){
-    this._cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
-          evt.target.classList.toggle('cards__like_active');
-        })
+    this._cardElement.querySelector('.cards__like').addEventListener('click', (evt) => this._likeCard(evt));
+    this._cardElement.querySelector('.cards__trash').addEventListener('click', (evt) => this.deleteCard(evt))
+  }
+
+  _likeCard(evt){
+    evt.target.classList.toggle('cards__like_active');
+  }
+
+  deleteCard(evt){
+    const delcard = evt.currentTarget.closest('.cards__item');
+    delcard.remove();
   }
 
   // openPicPopup(cardElement){
@@ -37,14 +49,8 @@ class Card {
   //   })
   // }
 
-  likeCard(evt){
-    evt.target.classList.toggle('cards__like_active');
-  }
 
-  // deleteCard(evt){
-  //   const delcard = evt.currentTarget.closest('.cards__item');
-  //   delcard.remove();
-  // }
+
 }
 
 
