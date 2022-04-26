@@ -168,18 +168,17 @@ const cardsList = document.querySelector('.cards');
 //   return cardElement
 // }
 
-// const renderCard = (cardElement, cardsList) => {
-//   const card = createCard(cardElement.link, cardElement.name);
-
-//   cardsList.prepend(card);
-// }
-
-
-initialCards.forEach((cardElement) => {
+const renderCard = (cardElement, cardsList) => {
   const card = new Card(cardElement.link, cardElement.name);
   const cardItem = card.createCard();
   cardsList.prepend(cardItem);
-});
+  // const card = createCard(cardElement.link, cardElement.name);
+
+  // cardsList.prepend(card);
+}
+
+
+initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
 
 // function deleteCard(evt){
 //   const delcard = evt.currentTarget.closest('.cards__item');
