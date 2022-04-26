@@ -121,7 +121,6 @@ btnClosePopupPic.addEventListener('click', function() {
 
 
 
-
 formEditElement.addEventListener('submit', handleProfileFormSubmit);
 formAddElement.addEventListener('submit', handleCardFormSubmit);
 
@@ -155,36 +154,15 @@ const initialCards = [
 
 const cardsList = document.querySelector('.cards');
 
-// function createCard(link, name) {
-//   const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-//   cardElement.querySelector('.cards__image').src = link;
-//   cardElement.querySelector('.cards__title').textContent = name;
-//   cardElement.querySelector('.cards__image').alt = name;
-//   cardElement.querySelector('.cards__like').addEventListener('click', function (evt) {
-//     evt.target.classList.toggle('cards__like_active');
-//   })
-//   openPicPopup(cardElement);
-//   cardElement.querySelector('.cards__trash').addEventListener('click', deleteCard)
-//   return cardElement
-// }
-
 const renderCard = (cardElement, cardsList) => {
   const card = new Card(cardElement.link, cardElement.name);
   const cardItem = card.createCard();
   cardsList.prepend(cardItem);
-  // const card = createCard(cardElement.link, cardElement.name);
-
-  // cardsList.prepend(card);
 }
 
 
 initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
 
-// function deleteCard(evt){
-//   const delcard = evt.currentTarget.closest('.cards__item');
-//   delcard.remove();
-// }
-
-//export {cardTemplate, namePopupPic, imgPopupPic, popupPic };
+export {openPicPopup};
 
 
