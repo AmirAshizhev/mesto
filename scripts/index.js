@@ -78,7 +78,7 @@ function handleCardFormSubmit (evt){
 
 
   const buttonElement = popupAdd.querySelector('.popup__save-button')
-  formValidated._addButtonClassList(buttonElement); //'popup__save-button_invalid');
+  formValidated._addButtonClassList(buttonElement);
 }
 
 btnOpenPopupEdit.addEventListener('click', function() {
@@ -88,7 +88,7 @@ btnOpenPopupEdit.addEventListener('click', function() {
 
   const inputList = popupEdit.querySelectorAll('.popup__item');
 
-  formValidated.hiderError(inputList, popupEdit)// 'popup__item_type_error', 'popup__item-error_active');
+  formValidated.hiderError(inputList, popupEdit)
 });
 
 btnOpenPopupAdd.addEventListener('click', function() {
@@ -96,7 +96,7 @@ btnOpenPopupAdd.addEventListener('click', function() {
 
   const inputList = popupAdd.querySelectorAll('.popup__item');
 
-  formValidated.hiderError(inputList, popupAdd)//*, 'popup__item_type_error', 'popup__item-error_active'*//); // обработчик ошибки
+  formValidated.hiderError(inputList, popupAdd)
 
 });
 
@@ -167,12 +167,6 @@ const renderCard = (cardElement, cardsList) => {
 initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
 
 
-
-// function startValidate(){
-
-// }
-
-// startValidate();
 
 const config = {
   inputSelector: '.popup__item',
