@@ -1,4 +1,5 @@
 import {Card} from './Card.js'
+import {FormValidator} from './FormValidation.js'
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -74,8 +75,10 @@ function handleCardFormSubmit (evt){
   linkPlaceInput.value = '';
   namePlaceInput.value = '';
 
+
+
   const buttonElement = popupAdd.querySelector('.popup__save-button')
-  addButtonClassList(buttonElement, 'popup__save-button_invalid');
+  formValidated._addButtonClassList(buttonElement); //'popup__save-button_invalid');
 }
 
 btnOpenPopupEdit.addEventListener('click', function() {
@@ -85,7 +88,7 @@ btnOpenPopupEdit.addEventListener('click', function() {
 
   const inputList = popupEdit.querySelectorAll('.popup__item');
 
-  hiderError(inputList, popupEdit, 'popup__item_type_error', 'popup__item-error_active');
+  formValidated.hiderError(inputList, popupEdit)// 'popup__item_type_error', 'popup__item-error_active');
 });
 
 btnOpenPopupAdd.addEventListener('click', function() {
@@ -93,7 +96,7 @@ btnOpenPopupAdd.addEventListener('click', function() {
 
   const inputList = popupAdd.querySelectorAll('.popup__item');
 
-  hiderError(inputList, popupAdd, 'popup__item_type_error', 'popup__item-error_active');
+  formValidated.hiderError(inputList, popupAdd)//*, 'popup__item_type_error', 'popup__item-error_active'*//); // обработчик ошибки
 
 });
 
@@ -162,6 +165,26 @@ const renderCard = (cardElement, cardsList) => {
 
 
 initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
+
+
+
+// function startValidate(){
+
+// }
+
+// startValidate();
+
+const config = {
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_invalid',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__item-error_active'
+}
+
+const formValidated = new FormValidator('.popup__form', config)
+
+formValidated.enableValidation();
 
 export {openPicPopup};
 
