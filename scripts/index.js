@@ -14,7 +14,7 @@ const btnClosePopupEdit = popupEdit.querySelector('.popup__exit-button');
 const btnClosePopupAdd = popupAdd.querySelector('.popup__exit-button');
 const btnClosePopupPic = popupPic.querySelector('.popup__exit-button');
 
-// const cardTemplate = document.querySelector('#cards__template').content;
+const cardTemplate = document.querySelector('#cards__template').content;
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -102,13 +102,11 @@ btnOpenPopupAdd.addEventListener('click', function() {
 });
 
 
-function openPicPopup(cardElement){
-  cardElement.querySelector('.cards__image').addEventListener('click', function(){
+function handleCardClick(name, link){
     openingPopup(popupPic);
-    namePopupPic.textContent = cardElement.querySelector('.cards__title').textContent;
-    imgPopupPic.src = cardElement.querySelector('.cards__image').src;
-    imgPopupPic.alt = cardElement.querySelector('.cards__image').alt;
-  })
+    namePopupPic.textContent = name;
+    imgPopupPic.src = link;
+    imgPopupPic.alt = name;
 }
 
 btnClosePopupEdit.addEventListener('click', function() {
@@ -159,7 +157,7 @@ const initialCards = [
 const cardsList = document.querySelector('.cards');
 
 const createCard = (link, name) => {
-  const card = new Card(link, name);
+  const card = new Card(link, name, cardTemplate, handleCardClick);
   const cardItem = card.createCard();
   return cardItem;
 }
@@ -191,6 +189,6 @@ const formAddValidated = new FormValidator(formAddElement, config)
 
 formAddValidated.enableValidation();
 
-export {openPicPopup};
+
 
 
