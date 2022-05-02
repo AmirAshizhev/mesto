@@ -11,12 +11,14 @@ class FormValidator {
   }
 
   enableValidation(){
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
-    formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {evt.preventDefault(); });
+    // const formList = Array.from(document.querySelectorAll(this._formSelector));
+    // console.log(formList)
+    // formList.forEach((formElement) => {
+      console.log(this._formSelector)
+      this._formSelector.addEventListener('submit', (evt) => {evt.preventDefault(); });
 
-      this._setEventListeners(formElement);
-    });
+      this._setEventListeners(this._formSelector);
+    // });
   }
 
   _setEventListeners(formElement){
@@ -71,7 +73,7 @@ class FormValidator {
 
   _toggleButtonState(inputList, buttonElement){
     if (this._hasInvalidInput(inputList)) {
-      this._addButtonClassList(buttonElement);
+      this.addButtonClassList(buttonElement);
     }
     else {
       buttonElement.classList.remove(this._inactiveButtonClass);
@@ -80,7 +82,7 @@ class FormValidator {
   }
 
 
-  _addButtonClassList = (buttonElement) => {
+  addButtonClassList = (buttonElement) => {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute('disabled', 'disabled');
   }

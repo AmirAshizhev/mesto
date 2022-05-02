@@ -7,6 +7,9 @@ const popupEdit = document.querySelector('.popup_edit-button');
 const popupAdd = document.querySelector('.popup_add-button');
 const popupPic = document.querySelector('.popup_picture');
 
+const inputListpopupEdit = popupEdit.querySelectorAll('.popup__item');
+const inputListpopupAdd = popupAdd.querySelectorAll('.popup__item');
+
 const btnClosePopupEdit = popupEdit.querySelector('.popup__exit-button');
 const btnClosePopupAdd = popupAdd.querySelector('.popup__exit-button');
 const btnClosePopupPic = popupPic.querySelector('.popup__exit-button');
@@ -24,6 +27,7 @@ const linkPlaceInput = popupAdd.querySelector('.popup__item_description');
 const imgPopupPic = popupPic.querySelector('.popup__img');
 const namePopupPic = popupPic.querySelector('.popup__text');
 
+const buttonElement = popupAdd.querySelector('.popup__save-button')
 
 function openingPopup(popup){
   popup.classList.add('popup_opened');
@@ -77,8 +81,9 @@ function handleCardFormSubmit (evt){
 
 
 
-  const buttonElement = popupAdd.querySelector('.popup__save-button')
-  formValidated._addButtonClassList(buttonElement);
+
+
+  formAddValidated.addButtonClassList(buttonElement);
 }
 
 btnOpenPopupEdit.addEventListener('click', function() {
@@ -86,17 +91,13 @@ btnOpenPopupEdit.addEventListener('click', function() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 
-  const inputList = popupEdit.querySelectorAll('.popup__item');
-
-  formValidated.hiderError(inputList, popupEdit)
+  formEditValidated.hiderError(inputListpopupEdit, popupEdit)
 });
 
 btnOpenPopupAdd.addEventListener('click', function() {
   openingPopup(popupAdd);
 
-  const inputList = popupAdd.querySelectorAll('.popup__item');
-
-  formValidated.hiderError(inputList, popupAdd)
+  formAddValidated.hiderError(inputListpopupAdd, popupAdd)
 
 });
 
@@ -157,10 +158,16 @@ const initialCards = [
 
 const cardsList = document.querySelector('.cards');
 
-const renderCard = (cardElement, cardsList) => {
-  const card = new Card(cardElement.link, cardElement.name);
+const createCard = (link, name) => {
+  const card = new Card(link, name);
   const cardItem = card.createCard();
-  cardsList.prepend(cardItem);
+  return cardItem;
+}
+
+const renderCard = (cardElement, cardsList) => {
+  const card = createCard(cardElement.link, cardElement.name);
+
+  cardsList.prepend(card);
 }
 
 
@@ -176,9 +183,13 @@ const config = {
   errorClass: 'popup__item-error_active'
 }
 
-const formValidated = new FormValidator('.popup__form', config)
+const formEditValidated = new FormValidator(formEditElement, config)
 
-formValidated.enableValidation();
+formEditValidated.enableValidation();
+
+const formAddValidated = new FormValidator(formAddElement, config)
+
+formAddValidated.enableValidation();
 
 export {openPicPopup};
 
