@@ -75,7 +75,7 @@ function handleCardFormSubmit (evt){
   evt.preventDefault();
 
   const data = {name: namePlaceInput.value, link: linkPlaceInput.value}
-  renderCard(data, cardsList);
+  renderCard(data);
   closingPopup(popupAdd);
   linkPlaceInput.value = '';
   namePlaceInput.value = '';
@@ -104,10 +104,10 @@ btnOpenPopupAdd.addEventListener('click', function() {
 
 
 function handleCardClick(name, link){
-    openingPopup(popupPic);
-    namePopupPic.textContent = name;
-    imgPopupPic.src = link;
-    imgPopupPic.alt = name;
+  openingPopup(popupPic);
+  namePopupPic.textContent = name;
+  imgPopupPic.src = link;
+  imgPopupPic.alt = name;
 }
 
 btnClosePopupEdit.addEventListener('click', function() {
