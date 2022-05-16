@@ -1,5 +1,6 @@
 import {Card} from './Card.js'
 import {FormValidator} from './FormValidation.js'
+import {Section} from './Section.js'
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -162,15 +163,18 @@ const createCard = (link, name) => {
   return cardItem;
 }
 
-const renderCard = (cardElement, cardsList) => {
+const renderCard = (cardElement) => {
   const card = createCard(cardElement.link, cardElement.name);
-
-  cardsList.prepend(card);
+  section.addItem(card)
+  // cardsList.prepend(card);
 }
 
 
-initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
+// initialCards.forEach(cardElement => renderCard(cardElement, cardsList));
 
+
+const section = new Section({items: initialCards, renderer: renderCard}, cardsList);
+section.renderItem();
 
 
 const config = {
