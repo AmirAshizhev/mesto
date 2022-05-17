@@ -1,6 +1,7 @@
 import {Card} from './Card.js'
 import {FormValidator} from './FormValidation.js'
 import {Section} from './Section.js'
+import { Popup } from './Popup.js';
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -30,37 +31,40 @@ const namePopupPic = popupPic.querySelector('.popup__text');
 
 const buttonElement = popupAdd.querySelector('.popup__save-button')
 
-function openingPopup(popup){
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEsc)
+// function openingPopup(popup){
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeByEsc)
 
-}
+// }
 
-function closingPopup (popup){
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEsc);
-}
+// function closingPopup (popup){
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closeByEsc);
+// }
 
-function closingPopupOverlay (popup) {
-  popup.addEventListener('click', function(evt) {
-    if (evt.target === evt.currentTarget){
-      closingPopup (popup);
-   }
-  });
-}
+// function closingPopupOverlay (popup) {
+//   popup.addEventListener('click', function(evt) {
+//     if (evt.target === evt.currentTarget){
+//       closingPopup (popup);
+//    }
+//   });
+// }
 
-closingPopupOverlay (popupAdd);
+// closingPopupOverlay (popupAdd);
 
-closingPopupOverlay (popupEdit);
+// closingPopupOverlay (popupEdit);
 
-closingPopupOverlay (popupPic);
+// closingPopupOverlay (popupPic);
 
-function closeByEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closingPopup(openedPopup);
-  }
-}
+// function closeByEsc(evt) {
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closingPopup(openedPopup);
+//   }
+// }
+
+const popupEditForm = new Popup(popupEdit);
+const popupAddForm = new Popup(popupAdd);
 
 
 function handleProfileFormSubmit (evt) {
@@ -68,7 +72,7 @@ function handleProfileFormSubmit (evt) {
 
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-  closingPopup(popupEdit);
+  popupEditForm.close();
 }
 
 function handleCardFormSubmit (evt){
@@ -76,19 +80,17 @@ function handleCardFormSubmit (evt){
 
   const data = {name: namePlaceInput.value, link: linkPlaceInput.value}
   renderCard(data);
-  closingPopup(popupAdd);
+  popupAddForm.close();
   linkPlaceInput.value = '';
   namePlaceInput.value = '';
-
-
-
 
 
   formAddValidated.addButtonClassList(buttonElement);
 }
 
 btnOpenPopupEdit.addEventListener('click', function() {
-  openingPopup(popupEdit);
+  popupEditForm.open();
+  popupEditForm.setEventListeners();
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 
@@ -96,7 +98,8 @@ btnOpenPopupEdit.addEventListener('click', function() {
 });
 
 btnOpenPopupAdd.addEventListener('click', function() {
-  openingPopup(popupAdd);
+  popupAddForm.open();
+  popupAddForm.setEventListeners();
 
   formAddValidated.hiderError(inputListpopupAdd, popupAdd)
 
@@ -111,11 +114,11 @@ function handleCardClick(name, link){
 }
 
 btnClosePopupEdit.addEventListener('click', function() {
-  closingPopup(popupEdit);
+  popupEditForm.close();
 });
 
 btnClosePopupAdd.addEventListener('click', function() {
-  closingPopup(popupAdd);
+  popupAddForm.close();
 });
 
 btnClosePopupPic.addEventListener('click', function() {
