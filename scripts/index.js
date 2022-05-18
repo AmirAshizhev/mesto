@@ -2,6 +2,7 @@ import {Card} from './Card.js'
 import {FormValidator} from './FormValidation.js'
 import {Section} from './Section.js'
 import { Popup } from './Popup.js';
+import { PopupWithImage } from './PopupWithImage.js';
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -26,8 +27,8 @@ const nameInput = popupEdit.querySelector('.popup__item_name');
 const jobInput = popupEdit.querySelector('.popup__item_description');
 const namePlaceInput = popupAdd.querySelector('.popup__item_name');
 const linkPlaceInput = popupAdd.querySelector('.popup__item_description');
-const imgPopupPic = popupPic.querySelector('.popup__img');
-const namePopupPic = popupPic.querySelector('.popup__text');
+// const imgPopupPic = popupPic.querySelector('.popup__img');
+// const namePopupPic = popupPic.querySelector('.popup__text');
 
 const buttonElement = popupAdd.querySelector('.popup__save-button')
 
@@ -65,6 +66,7 @@ const buttonElement = popupAdd.querySelector('.popup__save-button')
 
 const popupEditForm = new Popup(popupEdit);
 const popupAddForm = new Popup(popupAdd);
+const popupImgForm = new PopupWithImage(popupPic);
 
 
 function handleProfileFormSubmit (evt) {
@@ -107,10 +109,13 @@ btnOpenPopupAdd.addEventListener('click', function() {
 
 
 function handleCardClick(name, link){
-  openingPopup(popupPic);
-  namePopupPic.textContent = name;
-  imgPopupPic.src = link;
-  imgPopupPic.alt = name;
+  // openingPopup(popupPic);
+  popupImgForm.open(name, link);
+  popupImgForm.setEventListeners();
+  // console.log(evt.target)
+  // namePopupPic.textContent = name;
+  // imgPopupPic.src = link;
+  // imgPopupPic.alt = name;
 }
 
 btnClosePopupEdit.addEventListener('click', function() {
@@ -122,7 +127,7 @@ btnClosePopupAdd.addEventListener('click', function() {
 });
 
 btnClosePopupPic.addEventListener('click', function() {
-  closingPopup(popupPic);
+  popupImgForm.close();
 });
 
 
@@ -160,14 +165,14 @@ const initialCards = [
 
 const cardsList = document.querySelector('.cards');
 
-const createCard = (link, name) => {
+const createNewCard = (link, name) => {
   const card = new Card(link, name, cardTemplate, handleCardClick);
   const cardItem = card.createCard();
   return cardItem;
 }
 
 const renderCard = (cardElement) => {
-  const card = createCard(cardElement.link, cardElement.name);
+  const card = createNewCard(cardElement.link, cardElement.name);
   section.addItem(card)
   // cardsList.prepend(card);
 }
