@@ -80,7 +80,6 @@ function handleProfileFormSubmit (data) {
 
 function handleCardFormSubmit (data){
   // evt.preventDefault();
-  console.log(data)
   // const data = {name: namePlaceInput.value, link: linkPlaceInput.value}
   renderCard(data);
   popupAddForm.close();
@@ -133,8 +132,8 @@ btnClosePopupPic.addEventListener('click', function() {
 
 
 
-formEditElement.addEventListener('submit', handleProfileFormSubmit);
-formAddElement.addEventListener('submit', handleCardFormSubmit);
+// formEditElement.addEventListener('submit', handleProfileFormSubmit);
+// formAddElement.addEventListener('submit', handleCardFormSubmit);
 
 
 const initialCards = [
