@@ -69,8 +69,11 @@ const buttonElement = popupAdd.querySelector('.popup__save-button')
 const userInfo = new UserInfo(profileTitle, profileSubtitle);
 
 const popupEditForm = new PopupWithForm(popupEdit, handleProfileFormSubmit);
+popupEditForm.setEventListeners();
 const popupAddForm = new PopupWithForm(popupAdd, handleCardFormSubmit);
+popupAddForm.setEventListeners();
 const popupImgForm = new PopupWithImage(popupPic);
+popupImgForm.setEventListeners();
 
 
 function handleProfileFormSubmit (data) {
@@ -97,7 +100,7 @@ function handleCardFormSubmit (data){
 
 btnOpenPopupEdit.addEventListener('click', function() {
   popupEditForm.open();
-  popupEditForm.setEventListeners();
+  // popupEditForm.setEventListeners();
 
   userInfo.getUserInfo({name: nameInput, job: jobInput})
   // nameInput.value = profileTitle.textContent;
@@ -108,7 +111,7 @@ btnOpenPopupEdit.addEventListener('click', function() {
 
 btnOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
-  popupAddForm.setEventListeners();
+  // popupAddForm.setEventListeners();
 
   formAddValidated.hiderError(inputListpopupAdd, popupAdd)
 
@@ -118,7 +121,7 @@ btnOpenPopupAdd.addEventListener('click', function() {
 function handleCardClick(name, link){
   // openingPopup(popupPic);
   popupImgForm.open(name, link);
-  popupImgForm.setEventListeners();
+  // popupImgForm.setEventListeners();
   // console.log(evt.target)
   // namePopupPic.textContent = name;
   // imgPopupPic.src = link;
