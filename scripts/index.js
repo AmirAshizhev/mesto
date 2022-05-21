@@ -4,6 +4,7 @@ import {Section} from './Section.js'
 import { Popup } from './Popup.js';
 import { PopupWithImage } from './PopupWithImage.js';
 import { PopupWithForm } from './PopupWithForm.js';
+import { UserInfo } from './UserInfo.js';
 const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
 const btnOpenPopupAdd = document.querySelector('.profile__add-button');
 
@@ -24,8 +25,8 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const formEditElement = document.querySelector('#popup__form_edit');
 const formAddElement = document.querySelector('#popup__form_add');
-// const nameInput = popupEdit.querySelector('.popup__item_name');
-// const jobInput = popupEdit.querySelector('.popup__item_description');
+const nameInput = popupEdit.querySelector('.popup__item_name');
+const jobInput = popupEdit.querySelector('.popup__item_description');
 // const namePlaceInput = popupAdd.querySelector('.popup__item_name');
 // const linkPlaceInput = popupAdd.querySelector('.popup__item_description');
 // const imgPopupPic = popupPic.querySelector('.popup__img');
@@ -65,6 +66,8 @@ const buttonElement = popupAdd.querySelector('.popup__save-button')
 //   }
 // }
 
+const userInfo = new UserInfo(profileTitle, profileSubtitle);
+
 const popupEditForm = new PopupWithForm(popupEdit, handleProfileFormSubmit);
 const popupAddForm = new PopupWithForm(popupAdd, handleCardFormSubmit);
 const popupImgForm = new PopupWithImage(popupPic);
@@ -73,8 +76,10 @@ const popupImgForm = new PopupWithImage(popupPic);
 function handleProfileFormSubmit (data) {
   // evt.preventDefault();
   console.log(data)
-  profileTitle.textContent = data[0];
-  profileSubtitle.textContent = data[1];
+
+  userInfo.setUserInfo(data);
+  // profileTitle.textContent = data[0];
+  // profileSubtitle.textContent = data[1];
   popupEditForm.close();
 }
 
@@ -93,8 +98,10 @@ function handleCardFormSubmit (data){
 btnOpenPopupEdit.addEventListener('click', function() {
   popupEditForm.open();
   popupEditForm.setEventListeners();
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
+
+  userInfo.getUserInfo({name: nameInput, job: jobInput})
+  // nameInput.value = profileTitle.textContent;
+  // jobInput.value = profileSubtitle.textContent;
 
   formEditValidated.hiderError(inputListpopupEdit, popupEdit)
 });
