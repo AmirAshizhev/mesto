@@ -15,6 +15,7 @@ class PopupWithForm extends Popup {
     this._inputList.forEach(inputItem => {
       this._inputsData[inputItem.name] = inputItem.value;
     });
+
     return this._inputsData
   }
 
@@ -24,6 +25,7 @@ class PopupWithForm extends Popup {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValue());
       // this.close();
+      this._popupForm.reset();
     }
     );
   }

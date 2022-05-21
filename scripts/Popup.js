@@ -1,11 +1,13 @@
 class Popup {
   constructor(popup){
     this._popup = popup;
+    this._btnClose = this._popup.querySelector('.popup__exit-button');
   }
 
   open(){
     this._popup.classList.add('popup_opened');
     document.addEventListener('keydown', (evt) => this._handleEscClose(evt))
+    this._btnClose.addEventListener('click', () => this.close())
   }
 
   close(){

@@ -14,9 +14,9 @@ const popupPic = document.querySelector('.popup_picture');
 const inputListpopupEdit = popupEdit.querySelectorAll('.popup__item');
 const inputListpopupAdd = popupAdd.querySelectorAll('.popup__item');
 
-const btnClosePopupEdit = popupEdit.querySelector('.popup__exit-button');
-const btnClosePopupAdd = popupAdd.querySelector('.popup__exit-button');
-const btnClosePopupPic = popupPic.querySelector('.popup__exit-button');
+// const btnClosePopupEdit = popupEdit.querySelector('.popup__exit-button');
+// const btnClosePopupAdd = popupAdd.querySelector('.popup__exit-button');
+// const btnClosePopupPic = popupPic.querySelector('.popup__exit-button');
 
 const cardTemplate = document.querySelector('#cards__template').content;
 
@@ -72,9 +72,9 @@ const popupImgForm = new PopupWithImage(popupPic);
 
 function handleProfileFormSubmit (data) {
   // evt.preventDefault();
-
-  profileTitle.textContent = data[0].value;
-  profileSubtitle.textContent = data[1].value;
+  console.log(data)
+  profileTitle.textContent = data[0];
+  profileSubtitle.textContent = data[1];
   popupEditForm.close();
 }
 
@@ -118,17 +118,17 @@ function handleCardClick(name, link){
   // imgPopupPic.alt = name;
 }
 
-btnClosePopupEdit.addEventListener('click', function() {
-  popupEditForm.close();
-});
+// btnClosePopupEdit.addEventListener('click', function() {
+//   popupEditForm.close();
+// });
 
-btnClosePopupAdd.addEventListener('click', function() {
-  popupAddForm.close();
-});
+// btnClosePopupAdd.addEventListener('click', function() {
+//   popupAddForm.close();
+// });
 
-btnClosePopupPic.addEventListener('click', function() {
-  popupImgForm.close();
-});
+// btnClosePopupPic.addEventListener('click', function() {
+//   popupImgForm.close();
+// });
 
 
 
