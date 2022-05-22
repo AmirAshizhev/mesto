@@ -21,6 +21,7 @@ class Card {
     this._cardImage.src = this._link;
     this._cardElement.querySelector('.cards__title').textContent = this._name;
     this._cardImage.alt = this._name;
+    this._likeButton = this._cardElement.querySelector('.cards__like');
 
     this._setEventListeners();
 
@@ -28,21 +29,21 @@ class Card {
   }
 
   _setEventListeners(){
-    this._cardElement.querySelector('.cards__like').addEventListener('click', (evt) => this._likeCard(evt));
-    this._cardElement.querySelector('.cards__trash').addEventListener('click', (evt) => this._deleteCard(evt))
+    this._likeButton.addEventListener('click', () => this._likeCard());
+    this._cardElement.querySelector('.cards__trash').addEventListener('click', () => this._deleteCard())
     // openPicPopup(this._cardElement);
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
   }
 
-  _likeCard(evt){
-    evt.target.classList.toggle('cards__like_active');
+  _likeCard(){
+    this._likeButton.classList.toggle('cards__like_active');
   }
 
-  _deleteCard(evt){
-    const delcard = evt.currentTarget.closest('.cards__item');
-    delcard.remove();
+  _deleteCard(){
+    this._cardElement.closest('.cards__item').remove();
+
   }
 }
 

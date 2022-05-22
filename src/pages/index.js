@@ -7,12 +7,12 @@ import { UserInfo } from '../components/UserInfo.js';
 import '../pages/index.css';
 
 
-const btnOpenPopupEdit = document.querySelector('.profile__edit-button');
-const btnOpenPopupAdd = document.querySelector('.profile__add-button');
+const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
+const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 
 const popupEdit = document.querySelector('.popup_edit-button');
 const popupAdd = document.querySelector('.popup_add-button');
-const popupPic = document.querySelector('.popup_picture');
+// const popupPic = document.querySelector('.popup_picture');
 
 const inputListpopupEdit = popupEdit.querySelectorAll('.popup__item');
 const inputListpopupAdd = popupAdd.querySelectorAll('.popup__item');
@@ -32,11 +32,11 @@ const buttonElement = popupAdd.querySelector('.popup__save-button')
 
 const userInfo = new UserInfo(profileTitle, profileSubtitle);
 
-const popupEditForm = new PopupWithForm(popupEdit, handleProfileFormSubmit);
+const popupEditForm = new PopupWithForm('.popup_edit-button', handleProfileFormSubmit);
 popupEditForm.setEventListeners();
-const popupAddForm = new PopupWithForm(popupAdd, handleCardFormSubmit);
+const popupAddForm = new PopupWithForm('.popup_add-button', handleCardFormSubmit);
 popupAddForm.setEventListeners();
-const popupImgForm = new PopupWithImage(popupPic);
+const popupImgForm = new PopupWithImage('.popup_picture');
 popupImgForm.setEventListeners();
 
 
@@ -50,10 +50,10 @@ function handleCardFormSubmit (data){
   renderCard(data);
   popupAddForm.close();
 
-  formAddValidated.addButtonClassList(buttonElement);
+  formAddValidated.disableSubmitButton(buttonElement);
 }
 
-btnOpenPopupEdit.addEventListener('click', function() {
+buttonOpenPopupEdit.addEventListener('click', function() {
   popupEditForm.open();
 
   userInfo.getUserInfo({name: nameInput, job: jobInput})
@@ -61,7 +61,7 @@ btnOpenPopupEdit.addEventListener('click', function() {
   formEditValidated.hiderError(inputListpopupEdit, popupEdit)
 });
 
-btnOpenPopupAdd.addEventListener('click', function() {
+buttonOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
 
   formAddValidated.hiderError(inputListpopupAdd, popupAdd)
