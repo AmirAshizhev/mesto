@@ -51,7 +51,7 @@ function handleCardFormSubmit (data){
   renderCard(data);
   popupAddForm.close();
 
-  formAddValidated.disableSubmitButton(buttonElement);
+  formAddValidated.disableSubmitButton();
 }
 
 buttonOpenPopupEdit.addEventListener('click', function() {
@@ -59,13 +59,13 @@ buttonOpenPopupEdit.addEventListener('click', function() {
 
   userInfo.getUserInfo({name: nameInput, job: jobInput})
 
-  formEditValidated.hiderError(inputListpopupEdit, popupEdit)
+  formEditValidated.hiderError()
 });
 
 buttonOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
 
-  formAddValidated.hiderError(inputListpopupAdd, popupAdd)
+  formAddValidated.hiderError()
 
 });
 

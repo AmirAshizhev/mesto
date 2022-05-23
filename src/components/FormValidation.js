@@ -1,6 +1,6 @@
 class FormValidator {
-  constructor(formSelector, data){
-    this._formSelector = formSelector;
+  constructor(formElement, data){
+    this._formElement = formElement;
 
     this._inputSelector =  data.inputSelector;
     this._submitButtonSelector =  data.submitButtonSelector;
@@ -8,16 +8,16 @@ class FormValidator {
     this._inputErrorClass =  data.inputErrorClass;
     this._errorClass =  data.errorClass;
 
-    this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector))
-    this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
   }
 
   enableValidation(){
 
-      this._formSelector.addEventListener('submit', (evt) => {evt.preventDefault(); });
+    this._formElement.addEventListener('submit', (evt) => {evt.preventDefault(); });
 
-      this._setEventListeners(this._formSelector);
+      this._setEventListeners();
 
   }
 
@@ -45,23 +45,23 @@ class FormValidator {
   }
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.classList.add(this._errorClass);
     errorElement.textContent = errorMessage;
   }
 
   _hideInputError = (inputElement) => {
-    const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
 
   };
 
-  hiderError = (inputList, formElement) => {
-    inputList.forEach((inputElement) => {
-      this._hideInputError(formElement, inputElement)
+  hiderError = () => {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
     })
   }
 
