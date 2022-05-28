@@ -13,7 +13,7 @@ class UserInfo {
 
   setUserInfo(data){
     this._profileTitle.textContent = data.name;
-    this._profileSubtitle.textContent = data.description;
+    this._profileSubtitle.textContent = data.about;
   }
 }
 

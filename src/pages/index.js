@@ -5,6 +5,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { initialCards, config } from '../utils/constants.js';
+import { Api } from '../components/Api.js';
 import '../pages/index.css';
 
 
@@ -30,6 +31,35 @@ const jobInput = popupEdit.querySelector('.popup__item_description');
 const buttonElement = popupAdd.querySelector('.popup__save-button')
 
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  headers: {
+    authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getInitialCards()
+  .then((result) => {
+    console.log(result)
+    // section.renderItem(result)
+
+    result.map((card) => {renderCard(card)})
+  })
+  .catch((err) => {
+    console.log(err);
+});
+
+api.getUserInformation()
+  .then((result) => {
+    console.log(result)
+    userInfo.setUserInfo(result)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
 
 const userInfo = new UserInfo(profileTitle, profileSubtitle);
 
@@ -44,6 +74,7 @@ popupImgForm.setEventListeners();
 function handleProfileFormSubmit (data) {
   userInfo.setUserInfo(data);
   popupEditForm.close();
+
 }
 
 function handleCardFormSubmit (data){
@@ -88,8 +119,8 @@ const renderCard = (cardElement) => {
   section.addItem(card)
 }
 
-const section = new Section({items: initialCards, renderer: renderCard}, cardsList);
-section.renderItem();
+const section = new Section( renderCard, cardsList);
+// section.renderItem();
 
 
 const formEditValidated = new FormValidator(formEditElement, config)
