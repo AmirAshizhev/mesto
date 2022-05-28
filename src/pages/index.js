@@ -76,6 +76,12 @@ function handleProfileFormSubmit (data) {
   popupEditForm.close();
 
   api.setUserInformation(data)
+  .then((result) => {
+    console.log(result)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }
 
 function handleCardFormSubmit (data){
@@ -84,6 +90,14 @@ function handleCardFormSubmit (data){
   popupAddForm.close();
 
   formAddValidated.disableSubmitButton();
+
+  api.getNewCard(data)
+  .then((result) => {
+    console.log(result)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }
 
 buttonOpenPopupEdit.addEventListener('click', function() {

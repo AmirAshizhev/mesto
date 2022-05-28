@@ -31,14 +31,39 @@ class Api {
         name: data.name,
         about: data.about
       })
-      // .then(res => {
-      //   if (res.ok) {
-      //     return res.json();
-      //   }
 
-      //   return Promise.reject(`Ошибка: ${res.status}`);
-      // })
+    })
+
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
     });
+  }
+
+  getNewCard(data){
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-41/cards', {
+      method: 'POST',
+      headers: {
+        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    ;
   }
 
   getInitialCards() {
