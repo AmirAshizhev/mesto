@@ -41,7 +41,7 @@ const api = new Api({
 
 api.getInitialCards()
   .then((result) => {
-    console.log(result)
+    // console.log(result)
     // section.renderItem(result)
 
     result.map((card) => {renderCard(card)})
@@ -75,6 +75,7 @@ function handleProfileFormSubmit (data) {
   userInfo.setUserInfo(data);
   popupEditForm.close();
 
+  api.setUserInformation(data)
 }
 
 function handleCardFormSubmit (data){

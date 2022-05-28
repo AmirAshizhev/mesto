@@ -31,13 +31,13 @@ class Api {
         name: data.name,
         about: data.about
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
+      // .then(res => {
+      //   if (res.ok) {
+      //     return res.json();
+      //   }
 
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      //   return Promise.reject(`Ошибка: ${res.status}`);
+      // })
     });
   }
 
