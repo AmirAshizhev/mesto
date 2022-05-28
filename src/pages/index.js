@@ -44,7 +44,9 @@ api.getInitialCards()
     // console.log(result)
     // section.renderItem(result)
 
-    result.map((card) => {renderCard(card)})
+    result.map((card) => {renderCard(card)
+    })
+
   })
   .catch((err) => {
     console.log(err);
@@ -86,7 +88,7 @@ function handleProfileFormSubmit (data) {
 
 function handleCardFormSubmit (data){
 
-  renderCard(data);
+  // renderCard(data);
   popupAddForm.close();
 
   formAddValidated.disableSubmitButton();
@@ -94,6 +96,7 @@ function handleCardFormSubmit (data){
   api.getNewCard(data)
   .then((result) => {
     console.log(result)
+    renderCard(result);
   })
   .catch((err) => {
     console.log(err);
@@ -123,15 +126,16 @@ function handleCardClick(name, link){
 
 const cardsList = document.querySelector('.cards');
 
-const createNewCard = (link, name) => {
-  const card = new Card(link, name, cardTemplate, handleCardClick);
+const createNewCard = (link, name, likes) => {
+  const card = new Card(link, name, likes, cardTemplate, handleCardClick);
   const cardItem = card.createCard();
   return cardItem;
 }
 
 const renderCard = (cardElement) => {
-  const card = createNewCard(cardElement.link, cardElement.name);
+  const card = createNewCard(cardElement.link, cardElement.name, cardElement.likes.length);
   section.addItem(card)
+
 }
 
 const section = new Section( renderCard, cardsList);

@@ -5,8 +5,7 @@
   margin-right: 20px;
   height: 19px;
   width: 22px;
-  justify-self: end;
-  align-self: center;
+
   background-color: transparent;
   border: none;
 }
@@ -17,5 +16,21 @@
   cursor: pointer;
 }
 
+.cards__like-container{
+  display: grid;
+  justify-self: end;
+  align-self: center;
+}
 
+.cards__like-counter{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  margin-right: 19px;
+
+  color: #000000;
+}
 
