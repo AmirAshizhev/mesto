@@ -80,7 +80,7 @@ popupAvatarForm.setEventListeners();
 const popupImgForm = new PopupWithImage('.popup_picture');
 popupImgForm.setEventListeners();
 
-const popupWithSubmit = new PopupWithSubmit('.popup__trash', handleTrashSubmit);
+const popupWithSubmit = new PopupWithSubmit('.popup_trash', handleTrashSubmit);
 popupWithSubmit.setEventListeners();
 
 function handleTrashSubmit(card) {
