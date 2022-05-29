@@ -5,19 +5,21 @@ class Api {
 
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   getUserInformation(){
     return fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me', {
       headers: {
         authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc'
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._checkResponse);
   }
 
   setUserInformation(data){
@@ -34,13 +36,7 @@ class Api {
 
     })
 
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   getNewCard(data){
@@ -56,13 +52,7 @@ class Api {
       })
 
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse)
     ;
   }
 
@@ -72,13 +62,7 @@ class Api {
         authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc'
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    .then(this._checkResponse);
   }
 
   deleteCard(id){
@@ -90,13 +74,31 @@ class Api {
       }
 
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
+    .then(this._checkResponse)
+    ;
+  }
+
+  addLike(id) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-41/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this._checkResponse);
+  }
+
+  deleteLike(id){
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-41/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+        'Content-Type': 'application/json'
       }
 
-      return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .then(this._checkResponse)
     ;
   }
 }

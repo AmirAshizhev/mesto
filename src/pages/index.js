@@ -138,8 +138,27 @@ function handleCardClick(name, link){
   popupImgForm.open(name, link);
 }
 
-function handleLikeClick(){
+function handleLikeClick(card){
+  console.log(card.getIsLiked())
 
+  if (card.getIsLiked()){
+    api.deleteLike(card.getCardId())
+    .then(card.setIsLiked())
+    .then((data) => {
+      card.setLikeCount(data.likes)})
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  else{
+    api.addLike(card.getCardId())
+    .then(card.setIsLiked())
+    .then((data) => {
+      card.setLikeCount(data.likes)})
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 }
 
 function handleDeleteIconClick(card){
@@ -152,10 +171,10 @@ function handleDeleteIconClick(card){
 const cardsList = document.querySelector('.cards');
 
 const createNewCard = (link, name, likes, id, ownerId) => {
-  const card = new Card(link, name, likes, id, ownerId, cardTemplate, handleCardClick, handleDeleteIconClick, userInfo.getUserId());
+  const card = new Card(link, name, likes, id, ownerId, cardTemplate, handleCardClick, handleDeleteIconClick, handleLikeClick, userInfo.getUserId());
   const cardItem = card.createCard();
   // console.log(userInfo.getUserId())
-  // console.log(id)
+  // console.log(likes)
   // console.log(card)
   // console.log(card.getCardId())
   // console.log(cardItem)
@@ -163,7 +182,7 @@ const createNewCard = (link, name, likes, id, ownerId) => {
 }
 
 const renderCard = (cardElement) => {
-  const card = createNewCard(cardElement.link, cardElement.name, cardElement.likes.length, cardElement._id, cardElement.owner._id);
+  const card = createNewCard(cardElement.link, cardElement.name, cardElement.likes, cardElement._id, cardElement.owner._id);
   section.addItem(card)
 }
 

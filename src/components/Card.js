@@ -1,7 +1,7 @@
 class Card {
 
 
-  constructor(link, name, likes, id, ownerId, template, handleCardClick, handleDeleteIconClick, userId) {
+  constructor(link, name, likes, id, ownerId, template, handleCardClick, handleDeleteIconClick, handleLikeClick, userId) {
     this._link = link;
     this._name = name;
     this._likes = likes;
@@ -12,6 +12,8 @@ class Card {
     this._template = template;
     this._handleCardClick = handleCardClick;
     this._handleDeleteIconClick = handleDeleteIconClick
+    this._handleLikeClick = handleLikeClick;
+    this._isLikedByMe = this._likes.some(item => item._id === this._userId)
   }
 
   _getTamplate(){
@@ -28,7 +30,7 @@ class Card {
     this._cardImage.alt = this._name;
     this._likeButton = this._cardElement.querySelector('.cards__like');
     this._likeCountner = this._cardElement.querySelector('.cards__like-counter');
-    this._likeCountner.textContent = this._likes;
+    this._likeCountner.textContent = this._likes.length;
 
     this._trashIcon = this._cardElement.querySelector('.cards__trash')
     if (this._ownerId === this._userId) {
@@ -41,7 +43,10 @@ class Card {
   }
 
   _setEventListeners(){
-    this._likeButton.addEventListener('click', () => this._likeCard());
+    this._likeButton.addEventListener('click', () => {
+      this._likeCard();
+      this._handleLikeClick(this)
+    });
     this._trashIcon.addEventListener('click', () => this._handleDeleteIconClick(this))
     // openPicPopup(this._cardElement);
     this._cardImage.addEventListener('click', () => {
@@ -63,7 +68,13 @@ class Card {
 
   getCardId = () => this._id;
 
+  getIsLiked = () => this._isLikedByMe;
 
+  setIsLiked = () => this._isLikedByMe = !this._isLikedByMe;
+
+  setLikeCount = (likeCount) => {
+    this._likeCountner.textContent = likeCount.length;
+}
 }
 
 export {Card};
