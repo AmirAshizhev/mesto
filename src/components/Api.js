@@ -118,9 +118,7 @@ class Api {
     .then(this._checkResponse);
   }
 
-//   getAllData() {
-//     return Promise.all([this.getUserInformation(), this.getInitialCards()]);
-// }
+
 }
 
 export {Api}

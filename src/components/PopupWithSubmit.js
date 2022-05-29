@@ -6,7 +6,7 @@ class PopupWithSubmit extends Popup {
     this._handleTrashSubmit =handleTrashSubmit;
     this._popupForm = this._popup.querySelector('.popup__form');
 
-    // this._card = null;
+
   }
 
   open(card){

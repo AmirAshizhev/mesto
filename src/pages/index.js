@@ -19,8 +19,6 @@ const popupAdd = document.querySelector('.popup_add-button');
 const popupAvatar = document.querySelector('.popup_avatar')
 // const popupPic = document.querySelector('.popup_picture');
 
-const inputListpopupEdit = popupEdit.querySelectorAll('.popup__item');
-const inputListpopupAdd = popupAdd.querySelectorAll('.popup__item');
 
 const cardTemplate = document.querySelector('#cards__template').content;
 
@@ -33,9 +31,9 @@ const formAvatarElement = document.querySelector('#popup__form_avatar');
 
 const nameInput = popupEdit.querySelector('.popup__item_name');
 const jobInput = popupEdit.querySelector('.popup__item_description');
-const avtarInput = popupAvatar.querySelector('.popup__item_description');
 
-const buttonElement = popupAdd.querySelector('.popup__save-button')
+
+
 
 
 const api = new Api({
@@ -49,7 +47,6 @@ const api = new Api({
 api.getInitialCards()
   .then((result) => {
     console.log(result)
-    // section.renderItem(result)
 
     result.map((card) => {renderCard(card)
     })
@@ -96,9 +93,7 @@ function handleTrashSubmit(card) {
 }
 
 function handleAvatarFormSubmit(data){
-  // console.log(data)
-  // userInfo.setUserInfo(data);
-  // popupAvatarForm.close();
+
   popupAvatarForm.renderLoading(true)
   api.setUserAvatar(data)
   .then((result) => {
@@ -113,13 +108,11 @@ function handleAvatarFormSubmit(data){
 }
 
 function handleProfileFormSubmit (data) {
-  // console.log(data)
-  // userInfo.setUserInfo(data);
-  // popupEditForm.close();
+
   popupEditForm.renderLoading(true)
   api.setUserInformation(data)
   .then((result) => {
-    // console.log(result)
+
     userInfo.setUserInfo(result);
     popupEditForm.close();
   })
@@ -131,10 +124,6 @@ function handleProfileFormSubmit (data) {
 
 function handleCardFormSubmit (data){
   popupAddForm.renderLoading(true)
-  // renderCard(data);
-  // popupAddForm.close();
-
-  // formAddValidated.disableSubmitButton();
 
   api.getNewCard(data)
   .then((result) => {
@@ -159,13 +148,11 @@ buttonOpenPopupEdit.addEventListener('click', function() {
 buttonOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
 
-  // userInfo.get
   formAddValidated.hiderError()
 });
 
 buttonOpenPopupAvatar.addEventListener('click', function() {
   popupAvatarForm.open();
-  // userInfo.getUserInfo({link: avtarInput})
 
   formAvatarValidated.hiderError()
 })
@@ -210,11 +197,7 @@ const cardsList = document.querySelector('.cards');
 const createNewCard = (link, name, likes, id, ownerId) => {
   const card = new Card(link, name, likes, id, ownerId, cardTemplate, handleCardClick, handleDeleteIconClick, handleLikeClick, userInfo.getUserId());
   const cardItem = card.createCard();
-  // console.log(userInfo.getUserId())
-  // console.log(likes)
-  // console.log(card)
-  // console.log(card.getCardId())
-  // console.log(cardItem)
+
   return cardItem;
 }
 
@@ -224,7 +207,7 @@ const renderCard = (cardElement) => {
 }
 
 const section = new Section( renderCard, cardsList);
-// section.renderItem();
+
 
 
 const formEditValidated = new FormValidator(formEditElement, config)
