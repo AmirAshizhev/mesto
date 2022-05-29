@@ -12,9 +12,11 @@ import '../pages/index.css';
 
 const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
+const buttonOpenPopupAvatar = document.querySelector('.profile__avatar-button')
 
 const popupEdit = document.querySelector('.popup_edit-button');
 const popupAdd = document.querySelector('.popup_add-button');
+const popupAvatar = document.querySelector('.popup_avatar')
 // const popupPic = document.querySelector('.popup_picture');
 
 const inputListpopupEdit = popupEdit.querySelectorAll('.popup__item');
@@ -24,10 +26,14 @@ const cardTemplate = document.querySelector('#cards__template').content;
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
+const profileAvatr = document.querySelector('.profile__avatar');
 const formEditElement = document.querySelector('#popup__form_edit');
 const formAddElement = document.querySelector('#popup__form_add');
+const formAvatarElement = document.querySelector('#popup__form_avatar');
+
 const nameInput = popupEdit.querySelector('.popup__item_name');
 const jobInput = popupEdit.querySelector('.popup__item_description');
+const avtarInput = popupAvatar.querySelector('.popup__item_description');
 
 const buttonElement = popupAdd.querySelector('.popup__save-button')
 
@@ -64,12 +70,16 @@ api.getUserInformation()
 
 
 
-const userInfo = new UserInfo(profileTitle, profileSubtitle);
+const userInfo = new UserInfo(profileTitle, profileSubtitle, profileAvatr);
 
 const popupEditForm = new PopupWithForm('.popup_edit-button', handleProfileFormSubmit);
 popupEditForm.setEventListeners();
 const popupAddForm = new PopupWithForm('.popup_add-button', handleCardFormSubmit);
 popupAddForm.setEventListeners();
+
+const popupAvatarForm = new PopupWithForm('.popup_avatar', handleAvatarFormSubmit)
+popupAvatarForm.setEventListeners();
+
 const popupImgForm = new PopupWithImage('.popup_picture');
 popupImgForm.setEventListeners();
 
@@ -85,15 +95,32 @@ function handleTrashSubmit(card) {
     });
 }
 
+function handleAvatarFormSubmit(data){
+  // console.log(data)
+  // userInfo.setUserInfo(data);
+  // popupAvatarForm.close();
 
+  api.setUserAvatar(data)
+  .then((result) => {
+    userInfo.setUserInfo(result);
+    popupAvatarForm.close();
+    console.log(result)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
 
 function handleProfileFormSubmit (data) {
-  userInfo.setUserInfo(data);
-  popupEditForm.close();
+  // console.log(data)
+  // userInfo.setUserInfo(data);
+  // popupEditForm.close();
 
   api.setUserInformation(data)
   .then((result) => {
-    console.log(result)
+    // console.log(result)
+    userInfo.setUserInfo(result);
+    popupEditForm.close();
   })
   .catch((err) => {
     console.log(err);
@@ -128,9 +155,17 @@ buttonOpenPopupEdit.addEventListener('click', function() {
 buttonOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
 
+  // userInfo.get
   formAddValidated.hiderError()
 
 });
+
+buttonOpenPopupAvatar.addEventListener('click', function() {
+  popupAvatarForm.open();
+  // userInfo.getUserInfo({link: avtarInput})
+
+  formAvatarValidated.hiderError()
+})
 
 
 function handleCardClick(name, link){
@@ -139,7 +174,6 @@ function handleCardClick(name, link){
 }
 
 function handleLikeClick(card){
-  console.log(card.getIsLiked())
 
   if (card.getIsLiked()){
     api.deleteLike(card.getCardId())
@@ -197,6 +231,9 @@ formEditValidated.enableValidation();
 const formAddValidated = new FormValidator(formAddElement, config)
 
 formAddValidated.enableValidation();
+
+const formAvatarValidated = new FormValidator (formAvatarElement, config)
+formAvatarValidated.enableValidation();
 
 
 

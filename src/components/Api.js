@@ -101,6 +101,26 @@ class Api {
     .then(this._checkResponse)
     ;
   }
+
+  setUserAvatar(data){
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-41/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.link
+      })
+
+    })
+
+    .then(this._checkResponse);
+  }
+
+//   getAllData() {
+//     return Promise.all([this.getUserInformation(), this.getInitialCards()]);
+// }
 }
 
 export {Api}

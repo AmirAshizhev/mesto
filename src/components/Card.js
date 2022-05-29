@@ -66,11 +66,17 @@ class Card {
 
   }
 
-  getCardId = () => this._id;
+  getCardId() {
+    return this._id
+  };
 
-  getIsLiked = () => this._isLikedByMe;
+  getIsLiked() {
+    return this._isLikedByMe
+  };
 
-  setIsLiked = () => this._isLikedByMe = !this._isLikedByMe;
+  setIsLiked () {
+    return this._isLikedByMe = !this._isLikedByMe
+  };
 
   setLikeCount = (likeCount) => {
     this._likeCountner.textContent = likeCount.length;
