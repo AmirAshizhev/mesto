@@ -1,8 +1,8 @@
 class Section {
-  constructor(renderer, selector){
+  constructor(renderer, itemСontainer){
 
     this._renderer = renderer;
-    this._selector = selector;
+    this._itemСontainer = itemСontainer;
   }
 
   renderItem(items) {
@@ -10,7 +10,7 @@ class Section {
   }
 
   addItem(itemHtml) {
-    this._selector.prepend(itemHtml);
+    this._itemСontainer.prepend(itemHtml);
   }
 
 }

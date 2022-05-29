@@ -32,6 +32,8 @@ class Card {
     this._likeCountner = this._cardElement.querySelector('.cards__like-counter');
     this._likeCountner.textContent = this._likes.length;
 
+    if(this._isLikedByMe){this.likeCard()}
+
     this._trashIcon = this._cardElement.querySelector('.cards__trash')
     if (this._ownerId === this._userId) {
       this._trashIcon.classList.add('cards__trash_visible')
@@ -44,7 +46,7 @@ class Card {
 
   _setEventListeners(){
     this._likeButton.addEventListener('click', () => {
-      this._likeCard();
+      // this._likeCard();
       this._handleLikeClick(this)
     });
     this._trashIcon.addEventListener('click', () => this._handleDeleteIconClick(this))
@@ -55,13 +57,13 @@ class Card {
     });
   }
 
-  _likeCard(){
+  likeCard(){
     this._likeButton.classList.toggle('cards__like_active');
   }
 
 
 
-  _deleteCard(){
+  deleteCard(){
     this._cardElement.closest('.cards__item').remove();
 
   }

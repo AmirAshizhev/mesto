@@ -44,26 +44,36 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
-  .then((result) => {
-    console.log(result)
+Promise.all([api.getUserInformation(), api.getInitialCards()])
 
-    result.map((card) => {renderCard(card)
-    })
-
+  .then(([userData, cards]) => {
+      userInfo.setUserInfo(userData);
+      section.renderItem(cards)
   })
-  .catch((err) => {
-    console.log(err);
-});
-
-api.getUserInformation()
-  .then((result) => {
-    console.log(result)
-    userInfo.setUserInfo(result)
-  })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
   });
+
+// api.getInitialCards()
+//   .then((result) => {
+//     console.log(result)
+
+//     result.map((card) => {renderCard(card)
+//     })
+
+//   })
+//   .catch((err) => {
+//     console.log(err);
+// });
+
+// api.getUserInformation()
+//   .then((result) => {
+//     console.log(result)
+//     userInfo.setUserInfo(result)
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 
 
@@ -85,8 +95,10 @@ popupWithSubmit.setEventListeners();
 
 function handleTrashSubmit(card) {
   api.deleteCard(card.getCardId())
-    .then(card._deleteCard())
-    .then(popupWithSubmit.close())
+    .then(() => {
+      card.deleteCard()
+      popupWithSubmit.close()
+    })
     .catch((err) => {
       console.log(err);
     });
@@ -129,8 +141,10 @@ function handleCardFormSubmit (data){
   .then((result) => {
     renderCard(result);
   })
-  .then(popupAddForm.close())
-  .then(formAddValidated.disableSubmitButton())
+  .then(()=>{
+    popupAddForm.close();
+
+  })
   .catch((err) => {
     console.log(err);
   })
@@ -141,19 +155,19 @@ buttonOpenPopupEdit.addEventListener('click', function() {
   popupEditForm.open();
 
   userInfo.getUserInfo({name: nameInput, job: jobInput})
-
+  formEditValidated.disableSubmitButton();
   formEditValidated.hiderError()
 });
 
 buttonOpenPopupAdd.addEventListener('click', function() {
   popupAddForm.open();
-
+  formAddValidated.disableSubmitButton();
   formAddValidated.hiderError()
 });
 
 buttonOpenPopupAvatar.addEventListener('click', function() {
   popupAvatarForm.open();
-
+  formAvatarValidated.disableSubmitButton();
   formAvatarValidated.hiderError()
 })
 
@@ -167,8 +181,10 @@ function handleLikeClick(card){
 
   if (card.getIsLiked()){
     api.deleteLike(card.getCardId())
-    .then(card.setIsLiked())
+    // .then(card.setIsLiked())
     .then((data) => {
+      card.setIsLiked();
+      card.likeCard();
       card.setLikeCount(data.likes)})
     .catch((err) => {
       console.log(err);
@@ -176,8 +192,9 @@ function handleLikeClick(card){
   }
   else{
     api.addLike(card.getCardId())
-    .then(card.setIsLiked())
     .then((data) => {
+      card.setIsLiked();
+      card.likeCard();
       card.setLikeCount(data.likes)})
     .catch((err) => {
       console.log(err);
@@ -220,7 +237,5 @@ formAddValidated.enableValidation();
 
 const formAvatarValidated = new FormValidator (formAvatarElement, config)
 formAvatarValidated.enableValidation();
-
-
 
 
