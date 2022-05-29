@@ -81,6 +81,24 @@ class Api {
       });
   }
 
+  deleteCard(id){
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-41/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc',
+        'Content-Type': 'application/json'
+      }
+
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    ;
+  }
 }
 
 export {Api}

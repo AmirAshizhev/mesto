@@ -3,6 +3,7 @@ import {FormValidator} from '../components/FormValidation.js'
 import {Section} from '../components/Section.js'
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithSubmit } from '../components/PopupWithSubmit.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { initialCards, config } from '../utils/constants.js';
 import { Api } from '../components/Api.js';
@@ -41,7 +42,7 @@ const api = new Api({
 
 api.getInitialCards()
   .then((result) => {
-    // console.log(result)
+    console.log(result)
     // section.renderItem(result)
 
     result.map((card) => {renderCard(card)
@@ -71,6 +72,19 @@ const popupAddForm = new PopupWithForm('.popup_add-button', handleCardFormSubmit
 popupAddForm.setEventListeners();
 const popupImgForm = new PopupWithImage('.popup_picture');
 popupImgForm.setEventListeners();
+
+const popupWithSubmit = new PopupWithSubmit('.popup__trash', handleTrashSubmit);
+popupWithSubmit.setEventListeners();
+
+function handleTrashSubmit(card) {
+  api.deleteCard(card.getCardId())
+    .then(card._deleteCard())
+    .then(popupWithSubmit.close())
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 
 
 function handleProfileFormSubmit (data) {
@@ -120,22 +134,37 @@ buttonOpenPopupAdd.addEventListener('click', function() {
 
 
 function handleCardClick(name, link){
+
   popupImgForm.open(name, link);
+}
+
+function handleLikeClick(){
+
+}
+
+function handleDeleteIconClick(card){
+  popupWithSubmit.open(card);
+
+
 }
 
 
 const cardsList = document.querySelector('.cards');
 
-const createNewCard = (link, name, likes) => {
-  const card = new Card(link, name, likes, cardTemplate, handleCardClick);
+const createNewCard = (link, name, likes, id, ownerId) => {
+  const card = new Card(link, name, likes, id, ownerId, cardTemplate, handleCardClick, handleDeleteIconClick, userInfo.getUserId());
   const cardItem = card.createCard();
+  // console.log(userInfo.getUserId())
+  // console.log(id)
+  // console.log(card)
+  // console.log(card.getCardId())
+  // console.log(cardItem)
   return cardItem;
 }
 
 const renderCard = (cardElement) => {
-  const card = createNewCard(cardElement.link, cardElement.name, cardElement.likes.length);
+  const card = createNewCard(cardElement.link, cardElement.name, cardElement.likes.length, cardElement._id, cardElement.owner._id);
   section.addItem(card)
-
 }
 
 const section = new Section( renderCard, cardsList);
