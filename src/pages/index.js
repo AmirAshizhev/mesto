@@ -99,7 +99,7 @@ function handleAvatarFormSubmit(data){
   // console.log(data)
   // userInfo.setUserInfo(data);
   // popupAvatarForm.close();
-
+  popupAvatarForm.renderLoading(true)
   api.setUserAvatar(data)
   .then((result) => {
     userInfo.setUserInfo(result);
@@ -108,14 +108,15 @@ function handleAvatarFormSubmit(data){
   })
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => popupAvatarForm.renderLoading(false));
 }
 
 function handleProfileFormSubmit (data) {
   // console.log(data)
   // userInfo.setUserInfo(data);
   // popupEditForm.close();
-
+  popupEditForm.renderLoading(true)
   api.setUserInformation(data)
   .then((result) => {
     // console.log(result)
@@ -124,24 +125,27 @@ function handleProfileFormSubmit (data) {
   })
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => popupEditForm.renderLoading(false))
 }
 
 function handleCardFormSubmit (data){
-
+  popupAddForm.renderLoading(true)
   // renderCard(data);
-  popupAddForm.close();
+  // popupAddForm.close();
 
-  formAddValidated.disableSubmitButton();
+  // formAddValidated.disableSubmitButton();
 
   api.getNewCard(data)
   .then((result) => {
-    console.log(result)
     renderCard(result);
   })
+  .then(popupAddForm.close())
+  .then(formAddValidated.disableSubmitButton())
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => popupAddForm.renderLoading(false));
 }
 
 buttonOpenPopupEdit.addEventListener('click', function() {
@@ -157,7 +161,6 @@ buttonOpenPopupAdd.addEventListener('click', function() {
 
   // userInfo.get
   formAddValidated.hiderError()
-
 });
 
 buttonOpenPopupAvatar.addEventListener('click', function() {
