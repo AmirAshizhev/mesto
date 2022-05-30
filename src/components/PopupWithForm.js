@@ -34,7 +34,7 @@ class PopupWithForm extends Popup {
   }
 
   renderLoading(isLoading) {
-    return isLoading ? this._buttonSubmit.textContent = 'Сохранение...' : this._buttonSubmit.textContent = 'Сохранение'
+    return isLoading ? this._buttonSubmit.textContent = 'Сохранение...' : this._buttonSubmit.textContent = 'Сохранить'
 }
 }
 

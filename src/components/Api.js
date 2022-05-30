@@ -15,9 +15,7 @@ class Api {
 
   getUserInformation(){
     return fetch(`${this._url}/users/me`, {
-      headers: {
-        authorization: 'c694f23c-67e8-4141-af46-7a2dc53c55cc'
-      }
+      headers: this._headers
     })
     .then(this._checkResponse);
   }
